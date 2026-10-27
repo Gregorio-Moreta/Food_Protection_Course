@@ -1,0 +1,197 @@
+import { Lesson, p, ul, ol, rule, tip, warn, mnemonic, exam, table, facts, sec, q } from "../types";
+
+export const lesson12: Lesson = {
+  n: 12,
+  title: "Pest Control",
+  blurb: "House flies, fruit flies, cockroaches, rats and mice, harborage types, Integrated Pest Management, and what the Health Code requires.",
+  minutes: 90,
+  keyPoints: [
+    "IPM has three principles: Starve them, Build them out, Destroy them.",
+    "Only a licensed pest control professional may apply pesticides, even store-bought aerosols are not allowed.",
+    "Fly zappers are prohibited. Fly catchers (glue) are acceptable.",
+    "Rodenticide tracking powder is banned in food establishments.",
+    "Doors need gaps under 1/8 inch. A licensed pest professional inspects at least monthly.",
+    "Norway rats are the most common NYC rodent.",
+  ],
+  sections: [
+    sec(
+      "house-flies",
+      "House flies",
+      p("The house fly is the greatest pest risk to food safety. More than twenty fly species are 'pathogenic' and carry Shigella, Salmonella, E. coli and other organisms. They are called filth flies because they live in or near filth. They pick up germs on their legs and body, and because they cannot chew, they vomit on food to soften it before eating. One fly can carry about 28 million bacteria on its body and 5 million inside."),
+      table(
+        ["Stage", "Details"],
+        [
+          ["Egg", "A female lays eggs in masses of 75 to 150 and can lay up to 900 in her lifetime. Females often cluster, up to 50 at a time."],
+          ["Larva (maggot)", "In warm weather emerges within 8 to 20 hours. Three stages. Total development about 1 week in warm weather, up to 8 weeks when cool. Needs damp organic material."],
+          ["Pupa", "The larva moves to a cool, dry place, sometimes over 100 feet away. Adult emerges in 3 days to 5 weeks."],
+          ["Adult", "Lives in and around garbage and waste."],
+        ],
+      ),
+      ul(
+        "Habitat: decaying organic matter such as garbage, animal feces and soil mixed with garbage. Good sanitation and refuse management is the most basic and critical step.",
+        "Clean dumpsters, waste areas and trash receptacles regularly.",
+        "Vermin-proof the building: 18 mesh screens on windows, roof vents and other openings. Self closing doors. A screened door at back or delivery entrances.",
+        "Keep drains clear. Clogged floor drains are a damp breeding place.",
+      ),
+      table(
+        ["Fly control tool", "Notes"],
+        [
+          ["Fly zappers (electrocuting)", "Prohibited. Electrocuted fly parts can become airborne and land on exposed food."],
+          ["Fly catchers (glue board)", "Acceptable. Flies are stunned and held on a replaceable glue trap."],
+          ["Trap placement", "Outdoors, place to lure flies away. Indoors, place where they cannot be seen from outside."],
+          ["Poison baits", "Only a licensed pest control officer may use them."],
+          ["Air curtains", "A steady blast of air above doorways keeps flying insects, dust and outside air out."],
+        ],
+      ),
+    ),
+    sec(
+      "fruit-flies",
+      "Fruit flies",
+      ul(
+        "Very small, about 1/8 inch, with red eyes, tan head and thorax, darker abdomen.",
+        "Breed in and feed on overripe fruit, vegetables and moist decaying matter.",
+        "Look for breeding sources: decaying produce stored outside the refrigerator, garbage cans, beneath and behind low equipment, and floor-level cracks. Even tiny amounts of organic matter at equipment legs can hold thousands of larvae.",
+        "They follow air currents and usually have several breeding sites. Check outside dumpsters and compost too.",
+        "Control: good housekeeping, remove breeding sites, handle trash, store produce properly.",
+      ),
+    ),
+    sec(
+      "roaches",
+      "Cockroaches",
+      p("Roaches carry disease-causing bacteria on their bodies and spread them through droppings and contact. Roach dust (body parts and droppings) is a strong asthma trigger. 40 to 60 percent of people with asthma also have a serious cockroach allergy, and the allergens are heat stable. NYC has two main types."),
+      table(
+        ["", "German cockroach", "American cockroach"],
+        [
+          ["Size and look", "About 5/8 inch. Light brown with two dark stripes on the shield behind the head. Young are wingless and nearly black with one light stripe.", "About 1 1/2 inches (38 mm), the largest house-infesting roach. Reddish brown, with a yellowish margin behind the head. Adults may fly."],
+          ["Where", "Kitchens and bathrooms. Hide behind baseboards, in cracks, under stoves, refrigerators and dishwashers. Daytime sightings mean a severe infestation. Live within 5 feet of food and water.", "Moist areas: basements, around pipes and sewers. Like about 85°F, dislike cold. Move indoors in winter and after heavy rain."],
+          ["Reproduction", "Female carries the egg capsule until just before hatching. 4 to 6 cases per life, 30 to 50 eggs each (about 36 per capsule). Eggs hatch in 28 to 30 days, nymphs develop in 40 to 125 days. 3 to 4 generations a year.", "Slower development, so large infestations indoors are less common."],
+          ["How they arrive", "Hitchhike on egg cartons, soft drink cartons, potato and onion sacks, used furniture and appliances, beer cases.", "Enter through sewer connections, under doors, around pipes, air ducts."],
+        ],
+      ),
+      ul(
+        "Seal cracks and holes in floors, walls and ceilings. Place equipment flush to wall and floor or far enough to clean around it.",
+        "Replace wooden fixtures with metal where possible.",
+        "Remove rubbish, debris and standing water. Keep garbage in tightly covered metal cans and clean cans after emptying.",
+        "Clean the whole establishment every night.",
+        "Chemical pesticide may not be used unless the person is a certified commercial applicator. This includes grocery store aerosol cans.",
+      ),
+    ),
+    sec(
+      "rats",
+      "Norway rats",
+      p("The Norway rat (Rattus norvegicus) is the most common rodent in New York City. It is a burrowing mammal, not native to the US, thought to have arrived on ships in the 1700s. Adults weigh about 1 pound."),
+      table(
+        ["Topic", "Facts"],
+        [
+          ["Habitat", "Burrows in the ground near vegetation, under buildings and slabs, along stream banks, in garbage dumps, beneath sidewalks and along foundations. Burrows are typically within 25 to 125 feet of food. Also nest in walls."],
+          ["Diet", "Eat almost anything, but prefer meat, fish, grains, nuts and cereals. Need 1/2 to 1 ounce of water a day. Garbage gives a balanced diet. They avoid stale or contaminated food."],
+          ["Life", "Outdoor lifespan about 1 year. Gestation 21 to 22 days, litters of 8 to 12. 4 to 7 litters a year, 60 to 70 or more young annually. Independent at 3 to 4 weeks. Mature at about 3 months."],
+          ["Senses", "Poor eyesight (about 2 to 3 feet), color blind. Excellent smell, taste, hearing and touch. Sense motion up to 30 to 50 feet. Whiskers detect surfaces."],
+          ["Behavior", "Nocturnal. Rub against walls, leaving grease tracks along floor-wall junctions. Active by day when numbers are high, nests are disturbed or they are starving."],
+        ],
+      ),
+    ),
+    sec(
+      "mice",
+      "House mice",
+      ul(
+        "Small and slender, 2 to 5 ounces, grayish-brown. Live very close to people and prefer seeds and grains.",
+        "Are nibblers. Need only 2 to 3 grams of food a day and little water.",
+        "Nocturnal but may forage in the day. Seeing one in daylight does not necessarily mean an infestation.",
+        "Nests of fibrous material in a ball, 4 to 6 inches across. Litters of 4 to 6 pups after 19 to 21 days. 5 to 10 litters a year. Mature at 6 to 10 weeks.",
+        "Travel only 10 to 30 feet from the nest to food.",
+        "They do not compete well with rats, so a basement with rats is unlikely to have mice. Mice favor kitchens, spaces between walls and baseboards, and drop ceilings, which are often overlooked in surveys.",
+        "They explore constantly and memorize paths, but are not afraid of new objects.",
+      ),
+    ),
+    sec(
+      "ipm",
+      "Integrated Pest Management (IPM)",
+      p("IPM combines prevention and control to reduce use of dangerous rodenticides. Everything starts with a thorough inspection to learn how bad the problem is and which routes the rodents use."),
+      mnemonic("IPM: Starve them. Build them out. Destroy them."),
+      table(
+        ["Sign", "What it tells you"],
+        [
+          ["Droppings", "Soft and moist is recent. Hard and dry is old. The amount shows severity. Different sizes mean young are being raised."],
+          ["Gnawing", "Rodents gnaw about 2 percent of their lives to wear down teeth that keep growing."],
+          ["Runs", "Dust runways with white chalk or paint. Rodents reuse the same paths and leave marks."],
+          ["Other", "Burrows, odors, urine stains, sounds, live or dead rodents."],
+        ],
+      ),
+    ),
+    sec(
+      "starve",
+      "Principle 1: Starve them",
+      ul(
+        "Store food in containers rodents cannot gnaw: metal, glass or smooth hard plastic.",
+        "Clean up spills behind equipment and in hard to reach places.",
+        "Remove standing water and leaks. Rats need water.",
+        "Garbage containers: metal or hard smooth plastic with tight lids. Remove garbage every day.",
+        "Mice need very little water, so abundant food leads to larger infestations.",
+      ),
+    ),
+    sec(
+      "build-out",
+      "Principle 2: Build them out",
+      p("Eliminate harborage, the places where rodents hide, nest and breed. There are three kinds."),
+      table(
+        ["Harborage", "Cause", "Examples", "Prevention"],
+        [
+          ["Temporary", "Poor housekeeping, faulty operations or storage", "Stock and boxes left undisturbed, unused equipment, junk in closets and cellars, uncovered garbage cans, spilled food in passages, rubbish at the bottom of shafts", "Store neatly away from walls with room to clean. Move stock at least every 3 weeks. Rows with 2 foot aisles. Keep the lowest shelf 6 to 8 inches off the floor. Clean up spills. Use metal garbage cans with tight lids."],
+          ["Incidental", "Installation of fixtures that leaves hollow spaces", "Equipment not flush to walls, narrow spaces under counters, boxed-in pipes and columns, hollow partitions, damaged insulation, spaces above fixtures", "Place equipment flush or far enough for cleaning. Block spaces. Expose or remove boxing. Repair insulation. Line wooden bins with metal."],
+          ["Structural", "Building design or lack of repairs", "Holes around pipes and cables, loose bricks, hollow walls, doors with gaps over 1/4 inch, vents or grills with openings over 1/4 inch, earthen cellar floors", "Seal pipe openings with cement mortar. Metal collars and flanges. Flashing at least 6 inches above floor on gnawed edges. Concrete floors 3 to 4 inches thick. Anchor screens. Inspect regularly."],
+        ],
+      ),
+    ),
+    sec(
+      "destroy",
+      "Principle 3: Destroy them",
+      warn("Toxic pesticide is a last resort. The Health Code makes it illegal to use pesticides in a food establishment unless applied by a licensed pest control applicator. Be wary of anyone promising a quick fix."),
+      table(
+        ["Non-toxic control", "Notes"],
+        [
+          ["Snap traps", "Most useful. Set many at once ('mass trapping') so many are caught before they become trap-shy. First place them unset for a few days so rats get used to them. Bait with food rodents already eat or high protein like peanut butter, cheese, ground meat or deli meat. Replace stale bait."],
+          ["Live traps", "Cages with one-way entry. More humane. Can catch many at once."],
+          ["Glue boards", "Lowest success rate. Rodents sense the glue with their whiskers. Mostly catch young. Use only as part of the survey."],
+        ],
+      ),
+      ul(
+        "Dispose of dead rodents safely: never with bare hands, spray sanitizer before sweeping excreta, sanitize exposed food contact surfaces.",
+        "Rodenticide tracking powder is banned in commercial food establishments. It has 40 to 50 times the toxin concentration. Rodents ingest it while grooming.",
+      ),
+    ),
+    sec(
+      "code-requirements",
+      "What the Health Code now requires",
+      ul(
+        "Clean up refuse and anything pests hide or nest in.",
+        "Seal cracks, gaps and holes.",
+        "Fix leaks, drips and standing water.",
+        "Install door sweeps or other barriers. Any gap must be less than 1/8 inch.",
+        "Throw out food garbage, clean food scraps and grease, and store food in tightly closed containers.",
+        "Inspect the premises and incoming packages every day for pests.",
+        "Hire a pest management professional licensed by the NYS Department of Environmental Conservation (DEC) to examine the premises at least monthly.",
+        "Keep records with the professional's name, address, DEC license number, services provided and the effective date of the contract.",
+      ),
+      p("Live animals are not allowed in a food service establishment (Section 81.25), except service animals accompanying and trained to assist a person with a disability. A service animal's presence is not a violation and the person may not be denied access."),
+    ),
+  ],
+  quiz: [
+    q("Which pest poses the greatest food safety risk?", ["Fruit fly", "House fly", "Ant", "Moth"], 1, "House flies carry Shigella, Salmonella, E. coli and more."),
+    q("Which fly trap is prohibited in a food establishment?", ["Glue-board fly catcher", "Fly zapper", "Air curtain", "Screens"], 1, "Zapped fly parts can become airborne and land on food."),
+    q("What screen mesh is recommended on windows and vents?", ["4 mesh", "10 mesh", "18 mesh", "50 mesh"], 2, "18 mesh screens."),
+    q("What is the most common NYC rodent?", ["House mouse", "Norway rat", "Roof rat", "Squirrel"], 1, "The Norway rat."),
+    q("What are the three principles of IPM?", ["Starve them, build them out, destroy them", "Poison, trap, ignore", "Clean, spray, seal", "Inspect, report, wait"], 0, "Starve, build out, destroy."),
+    q("Who may apply pesticides in a food establishment?", ["Any employee", "The manager", "A licensed pest control applicator", "Anyone with store-bought spray"], 2, "Even aerosol cans from the grocery are not allowed."),
+    q("Which control method has the lowest success rate?", ["Snap traps", "Live traps", "Glue boards", "Mass trapping"], 2, "Rodents can sense the glue with their whiskers."),
+    q("Rodenticide tracking powder is:", ["Allowed with a permit", "Banned in food establishments", "Required annually", "Safe"], 1, "It is many times more concentrated."),
+    q("What is the maximum gap under doors?", ["Less than 1/8 inch", "1/2 inch", "1 inch", "No limit"], 0, "Install door sweeps. Any gap must be less than 1/8 inch."),
+    q("How often must a licensed pest professional examine the premises?", ["Weekly", "At least monthly", "Yearly", "Only when pests are seen"], 1, "And records must be kept."),
+    q("A German cockroach seen in the daytime suggests:", ["Nothing", "A severe infestation", "A recent delivery", "A small problem"], 1, "They normally hide during the day."),
+    q("Which cockroach lives near sewers and prefers moist areas?", ["German", "American", "Both equally", "Neither"], 1, "American cockroaches like moist areas and move indoors in winter and after rain."),
+    q("Which harborage comes from design or construction flaws?", ["Temporary", "Incidental", "Structural", "Mobile"], 2, "Holes around pipes, hollow walls, and doors with gaps are structural."),
+    q("How often should stored stock be moved to prevent nesting?", ["Daily", "At least every 3 weeks", "Yearly", "Never"], 1, "Disturb it at least every three weeks."),
+    q("Which rodent travels only 10 to 30 feet from its nest to food?", ["Norway rat", "House mouse", "Both", "Neither"], 1, "Rats stay within 25 to 125 feet of food."),
+    q("A service animal in a food establishment is:", ["A violation", "Not a violation", "Allowed only outside", "Allowed with a permit"], 1, "Section 81.25 does not apply to service animals for a person with a disability."),
+  ],
+};

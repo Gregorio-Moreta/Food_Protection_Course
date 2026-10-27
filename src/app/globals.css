@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --surface-2: #f0ede5;
+  --ink: #1d2a26;
+  --muted: #5d6b66;
+  --line: #e2ddd0;
+  --brand: #0f766e;
+  --brand-ink: #ffffff;
+  --brand-soft: #d9f0ec;
+  --accent: #c2410c;
+  --accent-soft: #fde8d8;
+  --good: #15803d;
+  --good-soft: #dcf5e4;
+  --bad: #b91c1c;
+  --bad-soft: #fde2e2;
+  --warn-soft: #fff3c9;
+  --warn-line: #e6b800;
+  --hl: #fff0a8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1614;
+    --surface: #17211e;
+    --surface-2: #1d2a26;
+    --ink: #e9f0ed;
+    --muted: #9db0a9;
+    --line: #2b3b36;
+    --brand: #2dd4bf;
+    --brand-ink: #062b27;
+    --brand-soft: #123b36;
+    --accent: #fb923c;
+    --accent-soft: #3a2415;
+    --good: #4ade80;
+    --good-soft: #12301d;
+    --bad: #f87171;
+    --bad-soft: #3a1717;
+    --warn-soft: #382f0b;
+    --warn-line: #b99500;
+    --hl: #4a4313;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brandink: var(--brand-ink);
+  --color-brandsoft: var(--brand-soft);
+  --color-accent: var(--accent);
+  --color-accentsoft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-goodsoft: var(--good-soft);
+  --color-bad: var(--bad);
+  --color-badsoft: var(--bad-soft);
+  --color-warnsoft: var(--warn-soft);
+  --color-warnline: var(--warn-line);
+  --color-hl: var(--hl);
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: "Fraunces Variable", ui-serif, Georgia, serif;
+}
+
+.speaking {
+  background: var(--hl);
+  border-radius: 6px;
+  box-shadow: 0 0 0 4px var(--hl);
+  transition: background 0.2s;
+}
+
+.scroll-mt {
+  scroll-margin-top: 96px;
+}
+
+@media print {
+  header,
+  .no-print,
+  .voicebar {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .print-break {
+    break-inside: avoid;
+  }
+}
