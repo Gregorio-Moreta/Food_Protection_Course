@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GearIcon } from "./Icons";
+import { ThemeMenu } from "./ThemeMenu";
 
 const links = [
   { href: "/", label: "Course" },
@@ -37,6 +38,7 @@ export function Header() {
             <GearIcon width={16} height={16} />
             <span className="hidden sm:inline">Voice</span>
           </button>
+          <ThemeMenu />
         </nav>
       </div>
     </header>
