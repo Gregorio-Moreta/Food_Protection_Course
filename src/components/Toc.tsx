@@ -62,7 +62,7 @@ export function Toc({ modules, lessons }: { modules: Module[]; lessons: Lesson[]
                           )}
                         </div>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex flex-wrap gap-2">
                         <button onClick={() => setOpen(open === n ? null : n)} className="rounded-full border border-line px-3 py-1.5 text-sm hover:bg-surface2">
                           {open === n ? "Hide" : "Sections"}
                         </button>
@@ -71,6 +71,9 @@ export function Toc({ modules, lessons }: { modules: Module[]; lessons: Lesson[]
                         </Link>
                         <Link href={`/lesson/${n}/quiz`} className="rounded-full border border-brand px-4 py-1.5 text-sm font-semibold text-brand hover:bg-brandsoft">
                           Mini quiz
+                        </Link>
+                        <Link href={`/official/${n}`} className="rounded-full border border-accent px-4 py-1.5 text-sm font-semibold text-accent hover:bg-accentsoft">
+                          Official quiz
                         </Link>
                       </div>
                     </div>

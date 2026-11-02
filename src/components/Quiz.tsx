@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Question } from "@/data/types";
-import { recordExam, recordQuiz, markRead } from "@/lib/progress";
+import { recordExam, recordQuiz, markRead, recordOfficial } from "@/lib/progress";
 import { CheckIcon, XIcon } from "./Icons";
 
 type Shuffled = { q: string; options: string[]; answer: number; why: string; key: string };
@@ -16,9 +16,10 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-function prepare(qs: Question[], shuffleQuestions: boolean): Shuffled[] {
+function prepare(qs: Question[], shuffleQuestions: boolean, shuffleOptions = true): Shuffled[] {
   const base = qs.map((q, i) => {
-    const order = shuffle(q.options.map((_, idx) => idx));
+    const idxs = q.options.map((_, idx) => idx);
+    const order = shuffleOptions ? shuffle(idxs) : idxs;
     return { q: q.q, options: order.map((i) => q.options[i]), answer: order.indexOf(q.answer), why: q.why, key: `${i}-${q.q}` };
   });
   return shuffleQuestions ? shuffle(base) : base;
@@ -36,6 +37,12 @@ export function Quiz({
   limitMinutes,
   passPercent = 100,
   sampleSize,
+  keepQuestionOrder,
+  keepOptionOrder,
+  officialKey,
+  badge,
+  backLabel,
+  intro,
 }: {
   title: string;
   subtitle?: string;
@@ -48,6 +55,18 @@ export function Quiz({
   limitMinutes?: number;
   passPercent?: number;
   sampleSize?: number;
+  /** Keep questions in the order given (used for the official lesson quizzes) */
+  keepQuestionOrder?: boolean;
+  /** Keep answer choices in the order given, needed when choices say "All of the above" or "A and B" */
+  keepOptionOrder?: boolean;
+  /** Save scores under the separate official quiz progress instead of the lesson progress */
+  officialKey?: string;
+  /** Small label shown above the title, for example "Official questions" */
+  badge?: string;
+  /** Label for the back link on the results screen (defaults to "Review lesson") */
+  backLabel?: string;
+  /** Extra lines for the start screen */
+  intro?: string[];
 }) {
   const [run, setRun] = useState<Shuffled[] | null>(null);
   const [i, setI] = useState(0);
@@ -57,7 +76,7 @@ export function Quiz({
   const saved = useRef(false);
 
   const start = (qs: Question[] | Shuffled[] = questions, fresh = true) => {
-    const full = prepare(qs as Question[], true);
+    const full = prepare(qs as Question[], !(keepQuestionOrder && qs === questions), !keepOptionOrder);
     const prepared = sampleSize && qs === questions ? full.slice(0, sampleSize) : full;
     setRun(prepared);
     setI(0);
@@ -90,12 +109,13 @@ export function Quiz({
   useEffect(() => {
     if (!done || !run || saved.current) return;
     saved.current = true;
-    if (exam) recordExam(score, run.length);
+    if (officialKey) recordOfficial(officialKey, score, run.length);
+    else if (exam) recordExam(score, run.length);
     else if (lessonN) {
       recordQuiz(lessonN, score, run.length);
       if (score === run.length) markRead(lessonN);
     }
-  }, [done, run, score, exam, lessonN]);
+  }, [done, run, score, exam, lessonN, officialKey]);
 
   if (!run) {
     return (
@@ -103,17 +123,27 @@ export function Quiz({
         <Link href={backHref} className="text-sm font-semibold text-brand">
           Back
         </Link>
+        {badge && (
+          <div className="mt-4 inline-block rounded-full bg-accentsoft px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">{badge}</div>
+        )}
         <h1 className="font-display mt-3 text-4xl font-semibold">{title}</h1>
         {subtitle && <p className="mt-1 text-lg text-muted">{subtitle}</p>}
         <div className="mt-6 rounded-2xl border border-line bg-surface p-6">
           <ul className="space-y-2 leading-7">
-            <li>{sampleSize ?? questions.length} multiple choice questions, shuffled each time.</li>
+            {keepQuestionOrder ? (
+              <li>{questions.length} questions in the same order and wording as the official quiz.</li>
+            ) : (
+              <li>{sampleSize ?? questions.length} multiple choice questions, shuffled each time.</li>
+            )}
+            {intro?.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
             {exam ? (
               <>
                 <li>{limitMinutes} minute time limit. Answers and explanations appear at the end, like the real exam.</li>
                 <li>You need {passPercent} percent or higher to pass.</li>
               </>
-            ) : (
+            ) : intro ? null : (
               <>
                 <li>You see whether you were right, plus an explanation, after every question.</li>
                 <li>Aim for a perfect score before moving on. You can retake it as often as you like.</li>
@@ -164,7 +194,7 @@ export function Quiz({
               </button>
             )}
             <Link href={backHref} className="rounded-full border border-line px-6 py-2.5 font-semibold hover:bg-white/40">
-              Review lesson
+              {backLabel ?? "Review lesson"}
             </Link>
             {nextHref && (
               <Link href={nextHref} className="rounded-full border border-line px-6 py-2.5 font-semibold hover:bg-white/40">
@@ -180,7 +210,7 @@ export function Quiz({
             <ol className="mt-4 space-y-4">
               {missed.map(({ q, k }) => (
                 <li key={q.key} className="rounded-2xl border border-line bg-surface p-5">
-                  <div className="font-semibold leading-7">{q.q}</div>
+                  <div className="whitespace-pre-line font-semibold leading-7">{q.q}</div>
                   <div className="mt-2 text-sm text-bad">Your answer: {picked[k] == null ? "No answer" : q.options[picked[k]!]}</div>
                   <div className="text-sm font-semibold text-good">Correct: {q.options[q.answer]}</div>
                   <p className="mt-2 text-sm text-muted">{q.why}</p>
@@ -221,7 +251,8 @@ export function Quiz({
         <div className="h-full rounded-full bg-brand transition-all" style={{ width: `${((i + (revealed ? 1 : 0)) / run.length) * 100}%` }} />
       </div>
 
-      <h1 className="font-display mt-8 text-2xl font-semibold leading-snug">{cur.q}</h1>
+      {badge && <div className="mt-6 text-xs font-bold uppercase tracking-widest text-accent">{badge}</div>}
+      <h1 className={`font-display ${badge ? "mt-2" : "mt-8"} whitespace-pre-line text-2xl font-semibold leading-snug`}>{cur.q}</h1>
 
       <div className="mt-6 space-y-3" role="radiogroup" aria-label="Answers">
         {cur.options.map((o, oi) => {

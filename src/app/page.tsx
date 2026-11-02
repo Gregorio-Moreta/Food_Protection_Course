@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { lessons, modules, totalQuestions } from "@/data/lessons";
 import { Toc } from "@/components/Toc";
+import { officialTotal } from "@/data/official";
 
 export default function Home() {
   const minutes = lessons.reduce((a, l) => a + l.minutes, 0);
@@ -22,12 +23,39 @@ export default function Home() {
           <Link href="/practice-exam" className="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10">
             Practice final exam
           </Link>
+          <Link href="/official" className="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10">
+            Official quiz questions
+          </Link>
         </div>
         <dl className="mt-8 grid grid-cols-3 gap-4 text-center sm:max-w-md">
           <div><dt className="text-xs uppercase tracking-wide opacity-80">Lessons</dt><dd className="font-display text-3xl font-semibold">{lessons.length}</dd></div>
           <div><dt className="text-xs uppercase tracking-wide opacity-80">Quiz questions</dt><dd className="font-display text-3xl font-semibold">{totalQuestions()}</dd></div>
           <div><dt className="text-xs uppercase tracking-wide opacity-80">Study time</dt><dd className="font-display text-3xl font-semibold">{Math.round(minutes / 60)}h</dd></div>
         </dl>
+      </section>
+
+      <section className="mt-10 rounded-3xl border-2 border-accent bg-accentsoft p-6 sm:p-8">
+        <div className="text-xs font-bold uppercase tracking-widest text-accent">New: official questions and answers</div>
+        <h2 className="font-display mt-1 text-3xl font-semibold">The real lesson quizzes, word for word</h2>
+        <p className="mt-2 max-w-3xl leading-7">
+          All {officialTotal()} questions from the 15 lesson quizzes in the official NYC Health Department online course, with the official
+          answers. They sit alongside everything else here: take them as mini quizzes, study the full answer key, or mix them into one timed
+          test.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <Link href="/official" className="rounded-full bg-accent px-6 py-3 font-semibold text-bg hover:opacity-90">
+            Official quizzes
+          </Link>
+          <Link href="/official/answers" className="rounded-full border border-accent px-6 py-3 font-semibold text-accent hover:bg-white/40">
+            Official answer key
+          </Link>
+          <Link href="/official/exam" className="rounded-full border border-accent px-6 py-3 font-semibold text-accent hover:bg-white/40">
+            Mixed official test
+          </Link>
+          <Link href="/official/final-exam" className="rounded-full border border-accent px-6 py-3 font-semibold text-accent hover:bg-white/40">
+            About the in-person exam
+          </Link>
+        </div>
       </section>
 
       <Toc modules={modules} lessons={lessons} />

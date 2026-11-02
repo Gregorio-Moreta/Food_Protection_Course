@@ -5,6 +5,8 @@ export type Progress = {
   read: number[]; // lesson numbers marked complete
   quiz: Record<string, { best: number; total: number; attempts: number }>;
   exam: { best: number; total: number; attempts: number } | null;
+  /** Scores for the official question sections, keyed by lesson number or "exam" */
+  official?: Record<string, { best: number; total: number; attempts: number }>;
 };
 
 const KEY = "fpc-progress-v1";
@@ -65,6 +67,15 @@ export const recordExam = (score: number, total: number) => {
   load();
   const prev = cache.exam;
   commit({ ...cache, exam: { best: Math.max(prev?.best ?? 0, score), total, attempts: (prev?.attempts ?? 0) + 1 } });
+};
+
+export const recordOfficial = (key: string, score: number, total: number) => {
+  load();
+  const prev = cache.official?.[key];
+  commit({
+    ...cache,
+    official: { ...cache.official, [key]: { best: Math.max(prev?.best ?? 0, score), total, attempts: (prev?.attempts ?? 0) + 1 } },
+  });
 };
 
 export const resetProgress = () => commit(EMPTY);

@@ -9,6 +9,7 @@ import { useSpeech } from "@/lib/use-speech";
 import { useProgress, toggleRead } from "@/lib/progress";
 import { CheckIcon, ListIcon, SpeakerIcon } from "./Icons";
 import { lessons } from "@/data/lessons";
+import { getOfficialQuiz } from "@/data/official";
 
 export function LessonView({ lesson, total }: { lesson: Lesson; total: number }) {
   const st = useSpeech();
@@ -32,6 +33,7 @@ export function LessonView({ lesson, total }: { lesson: Lesson; total: number })
 
   const prev = lessons.find((l) => l.n === lesson.n - 1);
   const next = lessons.find((l) => l.n === lesson.n + 1);
+  const official = getOfficialQuiz(lesson.n);
 
   return (
     <div className="mx-auto grid max-w-6xl gap-8 px-4 pt-8 lg:grid-cols-[16rem_1fr]">
@@ -63,6 +65,11 @@ export function LessonView({ lesson, total }: { lesson: Lesson; total: number })
           <a href="#quiz" className="mt-1 block rounded-lg px-2 py-1.5 font-semibold text-brand hover:bg-brandsoft">
             Mini quiz
           </a>
+          {official && (
+            <Link href={`/official/${lesson.n}`} className="block rounded-lg px-2 py-1.5 font-semibold text-accent hover:bg-accentsoft">
+              Official quiz ({official.questions.length})
+            </Link>
+          )}
         </nav>
       </aside>
 
@@ -78,6 +85,11 @@ export function LessonView({ lesson, total }: { lesson: Lesson; total: number })
           <Link href={`/lesson/${lesson.n}/quiz`} className="rounded-full border border-brand px-5 py-2.5 font-semibold text-brand hover:bg-brandsoft">
             Take the mini quiz
           </Link>
+          {official && (
+            <Link href={`/official/${lesson.n}`} className="rounded-full border border-accent px-5 py-2.5 font-semibold text-accent hover:bg-accentsoft">
+              Official quiz
+            </Link>
+          )}
           <button onClick={() => toggleRead(lesson.n)} className={`flex items-center gap-2 rounded-full border px-5 py-2.5 font-semibold ${isRead ? "border-good bg-goodsoft text-good" : "border-line hover:bg-surface2"}`}>
             <CheckIcon width={18} height={18} /> {isRead ? "Marked as read" : "Mark as read"}
           </button>
@@ -124,6 +136,22 @@ export function LessonView({ lesson, total }: { lesson: Lesson; total: number })
           <Link href={`/lesson/${lesson.n}/quiz`} className="mt-5 inline-block rounded-full bg-brand px-8 py-3 font-semibold text-brandink hover:opacity-90">
             Start mini quiz
           </Link>
+          {official && (
+            <div className="mx-auto mt-6 max-w-md rounded-2xl border-2 border-accent bg-surface p-4">
+              <div className="text-xs font-bold uppercase tracking-widest text-accent">Official questions and answers</div>
+              <p className="mt-1 text-sm text-muted">
+                The {official.questions.length} questions from the official Lesson {lesson.n} quiz, word for word, with the official answers.
+              </p>
+              <div className="mt-3 flex flex-wrap justify-center gap-2">
+                <Link href={`/official/${lesson.n}`} className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-bg hover:opacity-90">
+                  Take the official quiz
+                </Link>
+                <Link href={`/official/answers#lesson-${lesson.n}`} className="rounded-full border border-accent px-5 py-2 text-sm font-semibold text-accent hover:bg-accentsoft">
+                  Official answer key
+                </Link>
+              </div>
+            </div>
+          )}
         </section>
 
         <div className="no-print mt-8 flex justify-between gap-4">
